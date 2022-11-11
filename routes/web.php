@@ -7,6 +7,4 @@ Route::view('/', 'welcome');
 
 Route::post('statuses', [StatusController::class, 'store'])->name('statuses.store')->middleware("auth");
 
-Route::get("login", function() {
-    // TODO
-})->name('login');
+Auth::routes();
