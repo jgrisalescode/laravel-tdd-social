@@ -9,7 +9,7 @@
 </head>
 <body>
     <x-shared.navbar />
-    <main class="py-4">
+    <main id="app" class="py-4">
         {{ $slot }}
     </main>
 </body>
