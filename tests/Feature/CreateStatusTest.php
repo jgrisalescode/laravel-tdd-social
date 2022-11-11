@@ -48,4 +48,38 @@ class CreateStatusTest extends TestCase
 
         $response->assertRedirect(route("login"));
     }
+
+    /** @test */
+    public function an_status_requires_a_body()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('statuses.store'), [
+            "body" => ""
+        ]);
+
+        $response->assertStatus(422);
+
+        $response->assertJsonStructure([
+            "errors" => ["body"]
+        ]);
+    }
+
+    /** @test */
+    public function an_status_requires_a_minimum_lenght()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('statuses.store'), [
+            "body" => "asd"
+        ]);
+
+        $response->assertStatus(422);
+
+        $response->assertJsonStructure([
+            "errors" => ["body"]
+        ]);
+    }
 }
